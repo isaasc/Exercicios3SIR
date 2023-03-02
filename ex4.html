@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materias</title>
+</head>
+
+<body onload="getSubjects()">
+  <table>
+    <thead>
+      <tr>
+        <th>Materias</th>
+      </tr>
+    </thead>
+    <tbody id="body">
+    </tbody>
+  </table>
+</body>
+
+</html>
+
+<script>
+  function getSubjects() {
+    fetch("http://demo9560003.mockable.io/subjects")
+      .then((response) => response.json())
+      .then((data) => createSubjectsTable(data))
+      .catch((error) => alert(error));
+  }
+
+  function createSubjectsTable(data) {
+    for (let i = 0; i < data.length; i++) {
+      let item = `
+          <tr>
+              <td>${data[i]}</td>
+          </tr>`;
+      document.getElementById("body").innerHTML += item;
+    }
+  }
+</script>

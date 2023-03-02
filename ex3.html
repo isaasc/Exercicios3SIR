@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veículos</title>
+</head>
+
+<body onload="getVeiculos()">
+  <label for="veiculos">Selecione um veículo:</label>
+  <select id="veiculos">
+  </select>
+</body>
+
+</html>
+
+<script>
+  function getVeiculos() {
+    fetch("http://demo9560003.mockable.io/veiculos")
+      .then((response) => response.json())
+      .then((data) => createOptions(data))
+      .catch((error) => alert(error));
+  }
+
+  function createOptions(data) {
+    for (let i = 0; i < data.length; i++) {
+      let item = `<option>${data[i]}</option>`;
+      document.getElementById("veiculos").innerHTML += item;
+    }
+  }
+</script>

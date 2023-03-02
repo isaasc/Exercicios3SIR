@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clientes</title>
+</head>
+
+<body onload="getClients()">
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+      </tr>
+    </thead>
+    <tbody id="body">
+    </tbody>
+  </table>
+</body>
+
+</html>
+
+<script>
+  function getClients() {
+    fetch("http://demo9560003.mockable.io/clients")
+      .then((response) => response.json())
+      .then((data) => createClientsTable(data))
+      .catch((error) => alert(error));
+  }
+
+  function createClientsTable(data) {
+    document.getElementById("body").innerHTML = "";
+    for (let i = 0; i < data.length; i++) {
+      let item = `
+          <tr>
+              <td>${data[i].nome}</td>
+              <td>${data[i].endereco}</td>
+              <td>${data[i].telefone}</td>
+          </tr>`;
+      document.getElementById("body").innerHTML += item;
+    }
+  }
+</script>
